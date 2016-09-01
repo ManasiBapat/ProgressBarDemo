@@ -1,0 +1,7 @@
+Test Cases
+
+1. Multiple progress bars should be seen.
+2. Progress bar should not go below 0%.
+3. Progress bar should change the colour to red once it exceeds 100%.
+4. User should be able to select the progress bar(dropdown). Once selected, on changing the percentage, selected progress bar should get changed.
+5. Application should get tested on all mobiles and tablets.
