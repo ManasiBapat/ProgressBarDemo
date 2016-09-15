@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+<style>
+    
+ h1 {  
+   text-align: center;  
+} 
+    
+#progressOne {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+}
+
+#progressTwo {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+}
+
+#progressThree {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+}
+
+#Progress1 {
+  position: absolute;
+  width: 5%;
+  height: 100%;
+  background-color: #4CAF50;
+}
+
+#Progress2{
+  position: absolute;
+  width: 5%;
+  height: 100%;
+  background-color: #4CAF50;
+}
+
+#Progress3 {
+  position: absolute;
+  width: 5%;
+  height: 100%;
+  background-color: #4CAF50;
+}
+
+#label1 {
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+#label2 {
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+#label3 {
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+    
+    
+</style>
+ 
+    </head>
+<body>
+
+<h1>Progress Bar Demo </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+<div id="progressOne">
+  <div id="Progress1">
+    <div id="label1">5%</div>
+  </div>
+</div>
+      </div>
+<br>
+    <div class="col-sm-4">
+    <div id="progressTwo">
+  <div id="Progress2">
+    <div id="label2">5%</div>
+  </div>
+</div>
+      </div>
+<br>
+<div class="col-sm-4">
+<div id="progressThree">
+  <div id="Progress3">
+    <div id="label3">5%</div>
+  </div>
+</div>
+      </div>
+        </div>
+    </div>
+<br>
+<select id="ddlViewBy">
+  <option value="label1">Progress1</option>
+  <option value="label2">Progress2</option>
+  <option value="label3">Progress3</option>
+</select>
+
+<button onclick="move25()">+25</button>
+<button onclick="moveback10()">-10</button>
+<button onclick="move10()">+10</button>
+<button onclick="moveback25()">-25</button>
+
+
+<script>
+
+var data = '{"successful":"true","rows":[{"color":"red","limit":"100"}]}';
+var jsonObj = JSON.parse(data);
+var exceedColor = jsonObj.rows[0].color;
+var limit = jsonObj.rows[0].limit;
+
+
+
+var width1 = 5;
+var width2 = 5;
+var width3 = 5;
+var width = 5;
+
+function move25() 
+{
+  move(25);
+}
+
+function moveback10() {
+  move(-10);
+}
+
+function move10() {
+  move(10);
+}
+
+function moveback25() {
+ move(-25);
+}
+
+function move(length){
+
+
+var e = document.getElementById("ddlViewBy");
+var labelNumber = e.options[e.selectedIndex].value;
+var progressNumber = e.options[e.selectedIndex].text;
+
+if(labelNumber == 'label1')
+{
+  width = width1;
+}else if (labelNumber == 'label2')
+{
+ width = width2;
+}else if (labelNumber == 'label3')
+{
+ width = width3;
+}
+
+       width = width + length;
+     
+if(width>=0){
+
+      document.getElementById(labelNumber).style.color = 'white';
+      document.getElementById(progressNumber).style.width = width + '%';
+      document.getElementById(labelNumber).innerHTML = width * 1  + '%';
+      if(labelNumber == 'label1'){
+            width1 = width;
+       }else if (labelNumber == 'label2'){
+           width2 = width;
+       }else if (labelNumber == 'label3'){
+           width3 = width;
+      }
+      }
+    if (width >= limit) {
+       document.getElementById(labelNumber).style.color = exceedColor;
+    }
+    if(width<0)
+    {
+
+    document.getElementById(progressNumber).style.width = 0 + '%';
+    document.getElementById(labelNumber).innerHTML = 0  + '%';
+    document.getElementById(labelNumber).style.color = 'white';
+width1=0;
+width2=0;
+width3=0;
+
+     }
+}
+</script>
+
+</body>
+</html>
+
